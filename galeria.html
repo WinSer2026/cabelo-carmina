@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Galeria · Cabelo Carmina | Matola - Maputo</title>
-<meta name="description" content="Galeria de inspirações, tranças e vídeos do Cabelo Carmina em Matola - Maputo." />
+<title>Galeria · Cabelo Carmina | Malhampsene, Matola - Maputo</title>
+<meta name="description" content="Galeria de inspirações, tranças e vídeos do Cabelo Carmina em Malhampsene, Matola - Maputo." />
 <style>
   :root{
     --gold:#c9a24b;--gold-soft:#e3c87f;--dark:#1c1410;--dark2:#2a201a;
@@ -37,31 +37,41 @@
   .filters button{border:1.5px solid var(--gold);background:transparent;color:var(--dark);font-weight:700;padding:9px 20px;border-radius:999px;cursor:pointer;font:inherit}
   .filters button.active{background:var(--gold);color:#1c1410}
   .filters button:hover{background:var(--gold-soft)}
+  .filters button.add{background:var(--gold);color:#1c1410;border-color:var(--gold);margin-left:6px}
 
   section{padding:30px 0 70px}
   .sec-title{text-align:center;margin:30px 0 22px}
   .sec-title .kicker{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
   .sec-title h2{font-size:clamp(1.4rem,3vw,2rem);margin:6px 0}
 
-  /* VIDEOS */
   .video-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-  .video-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .video-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer}
   .video-card video{width:100%;display:block;background:#000;aspect-ratio:9/16;object-fit:cover}
   .video-card .cap{padding:12px 16px;font-size:.9rem;color:var(--muted);font-weight:600}
 
-  /* MASONRY */
   .masonry{column-count:auto;column-width:230px;column-gap:14px}
-  .masonry a{display:block;margin-bottom:14px;break-inside:avoid;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#ddd}
+  .masonry a{display:block;margin-bottom:14px;break-inside:avoid;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#ddd;cursor:pointer}
   .masonry img{width:100%;display:block;transition:transform .3s ease}
   .masonry a:hover img{transform:scale(1.05)}
 
-  /* LIGHTBOX */
-  .lightbox{position:fixed;inset:0;background:rgba(20,14,10,.94);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+  .lightbox{position:fixed;inset:0;background:rgba(20,14,10,.94);display:none;align-items:center;justify-content:center;z-index:100;padding:24px;flex-direction:column}
   .lightbox.open{display:flex}
-  .lightbox img{max-width:94vw;max-height:90vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lightbox img,.lightbox video{max-width:94vw;max-height:78vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
   .lightbox .close{position:absolute;top:18px;right:22px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none}
   .lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.4rem;cursor:pointer;background:none;border:none;padding:10px 16px;user-select:none}
   .lightbox .prev{left:8px}.lightbox .next{right:8px}
+  .lb-order{margin-top:18px;background:var(--gold);color:#1c1410;font-weight:700;padding:13px 26px;border-radius:999px;text-decoration:none;box-shadow:var(--shadow);font-size:.95rem}
+  .lb-order:hover{background:var(--gold-soft)}
+
+  .add-panel{display:none;margin:14px 0 4px;background:#fff;border-radius:14px;padding:18px;box-shadow:var(--shadow);text-align:center}
+  .add-panel.open{display:block}
+  .add-panel .drop{border:2px dashed var(--gold);border-radius:14px;padding:20px;background:#fdfbf7;cursor:pointer}
+  .add-panel .drop:hover{background:#f6efe2}
+  .add-previews{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:14px}
+  .add-previews .p{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1;background:#ddd}
+  .add-previews .p img,.add-previews .p video{width:100%;height:100%;object-fit:cover;display:block}
+  .add-previews .p button{position:absolute;top:4px;right:4px;width:24px;height:24px;border:none;border-radius:50%;background:rgba(28,20,16,.8);color:#fff;cursor:pointer;font-size:.8rem}
+  .add-note{font-size:.85rem;color:var(--muted);margin-top:10px}
 
   footer{background:var(--dark);color:#cbbfae;text-align:center;padding:26px 22px;font-size:.88rem}
   @media(max-width:720px){.nav nav{display:none}}
@@ -90,7 +100,7 @@
 
 <section class="hero">
   <h1>Galeria de <span>Inspirações</span></h1>
-  <p>Tranças, penteados e referências reais para o seu próximo visual. Toque numa imagem para ampliar.</p>
+  <p>Tranças, penteados e referências reais para o seu próximo visual. Toque numa imagem ou vídeo para ampliar e encomendar.</p>
 </section>
 
 <section>
@@ -99,6 +109,17 @@
       <button id="f-all" class="active" onclick="setFilter('all')">Tudo</button>
       <button id="f-img" onclick="setFilter('img')">Imagens</button>
       <button id="f-vid" onclick="setFilter('vid')">Vídeos</button>
+      <button class="add" onclick="document.getElementById('addFile').click()">➕ Adicionar à galeria</button>
+    </div>
+
+    <div id="addPanel" class="add-panel">
+      <div class="drop" onclick="document.getElementById('addFile').click()">
+        <strong>📷 Escolha novas fotos ou vídeos para a galeria</strong>
+        <div class="add-note">Aparecem aqui na hora e pode enviá-las à Carmina para publicação.</div>
+      </div>
+      <input id="addFile" type="file" accept="image/*,video/*" multiple hidden />
+      <div class="add-previews" id="addPreview"></div>
+      <button id="sendAdd" class="lb-order" style="display:none;margin-top:14px">Enviar para a Carmina (WhatsApp)</button>
     </div>
 
     <div id="videosBlock">
@@ -117,42 +138,98 @@
   <button class="close" onclick="closeLB()">×</button>
   <button class="nav-btn prev" onclick="navLB(-1)">‹</button>
   <img id="lbImg" src="" alt="Inspiração" />
+  <video id="lbVid" src="" controls style="display:none"></video>
+  <a id="lbOrder" class="lb-order" href="#">🛒 Encomendar este visual</a>
   <button class="nav-btn next" onclick="navLB(1)">›</button>
 </div>
 
 <footer>
-  © <span id="year"></span> Cabelo Carmina — Matola - Maputo, Moçambique · <a href="index.html" style="color:var(--gold-soft)">Voltar ao site</a>
+  © <span id="year"></span> Cabelo Carmina — Malhampsene, Matola - Maputo, Moçambique · <a href="index.html" style="color:var(--gold-soft)">Voltar ao site</a>
 </footer>
 
 <script src="assets/galeria.js"></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbVid = document.getElementById('lbVid');
+  var lbOrder = document.getElementById('lbOrder');
   var currentList = [];
   var currentIndex = 0;
+  var currentIsVid = false;
+
+  function orderHref(src){ return 'index.html?ref=' + encodeURIComponent(src) + '#agendar'; }
+
+  function openLB(src){
+    currentIsVid = false;
+    currentList = GALERIA_IMAGENS.slice();
+    currentIndex = currentList.indexOf(src); if(currentIndex < 0) currentIndex = 0;
+    lbVid.style.display = 'none'; lbVid.pause();
+    lbImg.style.display = 'block'; lbImg.src = src;
+    lbOrder.href = orderHref(src);
+    lb.classList.add('open');
+  }
+  function openVB(src){
+    currentIsVid = true;
+    currentList = GALERIA_VIDEOS.slice();
+    currentIndex = currentList.indexOf(src); if(currentIndex < 0) currentIndex = 0;
+    lbImg.style.display = 'none';
+    lbVid.style.display = 'block'; lbVid.src = src; lbVid.play();
+    lbOrder.href = orderHref(src);
+    lb.classList.add('open');
+  }
+  function closeLB(){ lb.classList.remove('open'); lbVid.pause(); }
+  function navLB(d){
+    currentIndex = (currentIndex + d + currentList.length) % currentList.length;
+    var src = currentList[currentIndex];
+    if(currentIsVid){ lbVid.src = src; lbVid.play(); } else { lbImg.src = src; }
+    lbOrder.href = orderHref(src);
+  }
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLB(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLB();
+    if(e.key === 'ArrowLeft') navLB(-1);
+    if(e.key === 'ArrowRight') navLB(1);
+  });
 
   // render videos
-  var vrow = document.getElementById('videoRow');
   GALERIA_VIDEOS.forEach(function(v,i){
     var card = document.createElement('div');
     card.className = 'video-card';
-    card.innerHTML = '<video src="'+v+'" muted loop playsinline preload="metadata" onclick="this.paused?this.play():this.pause()"></video>'
-      + '<div class="cap">Vídeo '+(i+1)+' · toque para reproduzir</div>';
-    vrow.appendChild(card);
+    card.innerHTML = '<video src="'+v+'" muted loop playsinline preload="metadata"></video>'
+      + '<div class="cap">Vídeo '+(i+1)+' · toque para ampliar</div>';
+    card.addEventListener('click', function(){ openVB(v); });
+    document.getElementById('videoRow').appendChild(card);
   });
 
   // render images
-  var m = document.getElementById('masonry');
   GALERIA_IMAGENS.forEach(function(src){
     var a = document.createElement('a');
     a.href = '#';
-    a.setAttribute('data-src', src);
     var im = document.createElement('img');
     im.src = src; im.loading = 'lazy'; im.alt = 'Inspiração Cabelo Carmina';
     a.appendChild(im);
     a.addEventListener('click', function(e){ e.preventDefault(); openLB(src); });
-    m.appendChild(a);
+    document.getElementById('masonry').appendChild(a);
   });
+
+  // helpers para adicionar à galeria (visível nesta sessão)
+  function addImageToGallery(src){
+    var a = document.createElement('a'); a.href = '#';
+    var im = document.createElement('img'); im.src = src; im.alt = 'Nova imagem';
+    a.appendChild(im);
+    a.addEventListener('click', function(e){ e.preventDefault(); openLB(src); });
+    document.getElementById('masonry').appendChild(a);
+    GALERIA_IMAGENS.push(src);
+  }
+  function addVideoToGallery(src){
+    var card = document.createElement('div'); card.className = 'video-card';
+    card.innerHTML = '<video src="'+src+'" muted loop playsinline preload="metadata"></video><div class="cap">Novo vídeo · toque para ampliar</div>';
+    card.addEventListener('click', function(){ openVB(src); });
+    document.getElementById('videoRow').appendChild(card);
+    GALERIA_VIDEOS.push(src);
+  }
 
   function setFilter(f){
     document.getElementById('f-all').classList.toggle('active', f==='all');
@@ -162,25 +239,36 @@
     document.getElementById('videosBlock').style.display = (f==='img')?'none':'block';
   }
 
-  function openLB(src){
-    currentList = GALERIA_IMAGENS.slice();
-    currentIndex = currentList.indexOf(src);
-    if(currentIndex < 0) currentIndex = 0;
-    document.getElementById('lbImg').src = src;
-    document.getElementById('lightbox').classList.add('open');
+  // ADICIONAR À GALERIA
+  var addInput = document.getElementById('addFile');
+  var addPrev = document.getElementById('addPreview');
+  var sendBtn = document.getElementById('sendAdd');
+  var pending = [];
+  addInput.addEventListener('change', function(){ addFiles(addInput.files); addInput.value=''; });
+  function addFiles(list){
+    Array.prototype.forEach.call(list, function(f){
+      var url = URL.createObjectURL(f);
+      pending.push(f);
+      var isVid = f.type.indexOf('video/') === 0;
+      var d = document.createElement('div'); d.className = 'p';
+      d.innerHTML = (isVid ? '<video src="'+url+'" muted></video>' : '<img src="'+url+'" />') + '<button type="button" title="Remover">×</button>';
+      d.querySelector('button').addEventListener('click', function(){
+        pending = pending.filter(function(x){ return x !== f; });
+        d.remove(); if(!pending.length) sendBtn.style.display = 'none';
+      });
+      addPrev.appendChild(d);
+      if(isVid){ addVideoToGallery(url); } else { addImageToGallery(url); }
+      sendBtn.style.display = 'inline-flex';
+    });
+    document.getElementById('addPanel').classList.add('open');
+    setFilter(isVid ? 'vid' : 'img');
   }
-  function closeLB(){ document.getElementById('lightbox').classList.remove('open'); }
-  function navLB(d){
-    currentIndex = (currentIndex + d + currentList.length) % currentList.length;
-    document.getElementById('lbImg').src = currentList[currentIndex];
-  }
-  document.getElementById('lightbox').addEventListener('click', function(e){
-    if(e.target.id === 'lightbox') closeLB();
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeLB();
-    if(e.key === 'ArrowLeft') navLB(-1);
-    if(e.key === 'ArrowRight') navLB(1);
+  sendBtn.addEventListener('click', async function(){
+    var txt = "Olá Carmina! Quero adicionar estas fotos/vídeos à sua galeria.";
+    if(navigator.canShare && pending.length && navigator.canShare({files:pending})){
+      try{ await navigator.share({files:pending, text:txt}); return; }catch(e){}
+    }
+    window.open("https://wa.me/258842785461?text=" + encodeURIComponent(txt), "_blank");
   });
 </script>
 </body>

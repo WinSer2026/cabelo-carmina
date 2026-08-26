@@ -95,6 +95,10 @@
   .field textarea{resize:vertical;min-height:90px}
   .form-box .btn-gold{width:100%;justify-content:center;border:none;cursor:pointer;margin-top:6px}
   .form-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:14px}
+  .ref-preview{background:rgba(201,162,75,.12);border:1px solid var(--gold);border-radius:14px;padding:16px;margin-bottom:18px;text-align:center}
+  .ref-preview .kicker{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.75rem}
+  .ref-preview img,.ref-preview video{max-width:220px;max-height:240px;border-radius:12px;margin-top:10px;box-shadow:var(--shadow)}
+  .ref-preview p{font-size:.85rem;color:var(--muted);margin-top:6px}
 
   .contact-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:38px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
   .contact-box h2{font-size:1.8rem;margin-bottom:10px}
@@ -142,7 +146,7 @@
 </header>
 
 <section class="hero">
-  <div class="badge">★ Salão de Beleza · Matola - Maputo</div>
+  <div class="badge">★ Salão de Beleza · Malhampsene, Matola - Maputo</div>
   <h1>Beleza que <span>transforma</span>, cabelo que inspira</h1>
   <p>Especialista em traçar cabelo, tranças, extensões e simulação de próteses capilares. Realce natural e confiança para o seu dia a dia.</p>
   <div class="actions">
@@ -334,6 +338,7 @@
     <div class="form-box">
       <h2>Agende a sua visita</h2>
       <p class="sub">Preencha e envie a sua marcação diretamente pelo WhatsApp.</p>
+      <div id="refPreview" class="ref-preview" style="display:none"></div>
       <form id="bookingForm">
         <div class="form-row">
           <div class="field">
@@ -386,7 +391,7 @@
         <div class="kicker" style="color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem">Contacto & Horário</div>
         <h2>Fale com a Carmina</h2>
         <p><strong>Nome:</strong> Carmina Langa</p>
-        <p><strong>Local:</strong> Matola - Maputo, Moçambique</p>
+        <p><strong>Local:</strong> Malhampsene, Matola - Maputo, Moçambique</p>
         <p><strong>Cel:</strong> 842 785 461 &nbsp;|&nbsp; 870 508 213</p>
         <a class="wa" href="https://wa.me/258842785461" target="_blank" rel="noopener">💬 WhatsApp: 842 785 461</a>
         <a class="wa alt" href="https://wa.me/258870508213" target="_blank" rel="noopener">💬 WhatsApp: 870 508 213</a>
@@ -402,26 +407,56 @@
 </section>
 
 <footer>
-  © <span id="year"></span> Cabelo Carmina — Traços & Próteses Capilares · Matola - Maputo, Moçambique
+  © <span id="year"></span> Cabelo Carmina — Traços & Próteses Capilares · Malhampsene, Matola - Maputo, Moçambique
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  document.getElementById('bookingForm').addEventListener('submit', function(e){
+  // Estilo escolhido na galeria (?ref=...)
+  var refMedia = new URLSearchParams(location.search).get('ref');
+  if(refMedia){
+    refMedia = decodeURIComponent(refMedia);
+    var fname = refMedia.split('/').pop();
+    var isVid = /\.(mp4|webm|ogg)$/i.test(refMedia);
+    var media = isVid
+      ? '<video src="'+refMedia+'" controls></video>'
+      : '<img src="'+refMedia+'" alt="Estilo escolhido" />';
+    var box = document.getElementById('refPreview');
+    box.innerHTML = '<div class="kicker">Estilo escolhido</div>' + media + '<p>'+fname+'</p>';
+    box.style.display = 'block';
+  }
+
+  document.getElementById('bookingForm').addEventListener('submit', async function(e){
     e.preventDefault();
     var nome = document.getElementById('nome').value.trim();
     var tel = document.getElementById('telefone').value.trim();
     var serv = document.getElementById('servico').value;
     var data = document.getElementById('data').value;
     var obs = document.getElementById('obs').value.trim();
-    var msg = "Olá Carmina! Quero agendar um serviço.%0A%0A"
-      + "*Nome:* " + encodeURIComponent(nome) + "%0A"
-      + "*Serviço:* " + encodeURIComponent(serv) + "%0A"
-      + "*Data:* " + encodeURIComponent(data) + "%0A"
-      + "*Telefone:* " + encodeURIComponent(tel) + "%0A"
-      + (obs ? "*Obs:* " + encodeURIComponent(obs) + "%0A" : "");
-    window.open("https://wa.me/258842785461?text=" + msg, "_blank");
+
+    var plain = "Olá Carmina! Quero agendar um serviço.\n\n"
+      + "Nome: " + nome + "\n"
+      + (serv ? "Serviço: " + serv + "\n" : "")
+      + "Data: " + data + "\n"
+      + "Telefone: " + tel + "\n"
+      + (refMedia ? "Estilo escolhido: " + refMedia.split('/').pop() + "\n" : "")
+      + (obs ? "Obs: " + obs + "\n" : "");
+    var enc = encodeURIComponent(plain);
+
+    // Telemóvel: anexa a foto/vídeo diretamente no WhatsApp
+    if(refMedia && navigator.canShare){
+      try{
+        var blob = await fetch(refMedia).then(function(r){ return r.blob(); });
+        var mime = isVid ? 'video/mp4' : 'image/jpeg';
+        var file = new File([blob], fname, {type:mime});
+        if(navigator.canShare({files:[file]})){
+          await navigator.share({files:[file], text:plain});
+          return;
+        }
+      }catch(err){ /* fallback abaixo */ }
+    }
+    window.open("https://wa.me/258842785461?text=" + enc, "_blank");
   });
 </script>
 </body>
