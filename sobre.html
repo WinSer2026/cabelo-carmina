@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sobre · Cabelo Carmina | Malhampsene, Matola</title>
+<meta name="description" content="Conheça a Carmina Langa e o Cabelo Carmina em Malhampsene, Matola - Maputo." />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="none" stroke="#c9a24b" stroke-width="4"/><text x="50" y="62" text-anchor="middle" font-family="Segoe UI, Arial" font-size="38" font-weight="700" fill="#e3c87f">CL</text></svg>
+      Cabelo <span>Carmina</span>
+    </div>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="index.html#catalogo">Catálogo</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="dicas.html">Dicas</a>
+      <a href="depoimentos.html">Depoimentos</a>
+      <a href="sobre.html">Sobre</a>
+    </nav>
+    <div class="right">
+      <button class="theme-btn" id="themeBtn" title="Modo escuro/claro">🌓</button>
+      <a class="cta" href="index.html#agendar">Agendar agora</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:80px 22px">
+  <div class="badge">★ A nossa história</div>
+  <h1>Conheça a <span>Carmina</span></h1>
+  <p>O rosto e a mão por trás do Cabelo Carmina.</p>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sobre">
+      <div class="foto" id="foto"></div>
+      <div>
+        <div class="kicker" style="color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem">Quem sou</div>
+        <h2 id="titulo" style="margin:8px 0 16px"></h2>
+        <p id="bio"></p>
+        <a class="btn btn-gold" href="index.html#agendar">Agendar uma visita</a>
+        <a class="btn btn-ghost" style="color:var(--ink);border-color:var(--line)" href="galeria.html">Ver galeria</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Cabelo Carmina — Malhampsene, Matola - Maputo, Moçambique · <a href="index.html">Voltar ao site</a>
+</footer>
+<a class="fab" id="fab" href="#">💬</a>
+
+<script src="assets/conteudo.js"></script>
+<script>
+  document.getElementById('year').textContent=new Date().getFullYear();
+  document.getElementById('foto').style.backgroundImage='url("'+CONFIG.salon.fotoPerfil+'")';
+  document.getElementById('titulo').textContent=CONFIG.salon.dona;
+  document.getElementById('bio').textContent=CONFIG.salon.sobre;
+  document.getElementById('fab').href='https://wa.me/'+CONFIG.salon.whatsapp1;
+  var t=localStorage.getItem('tema'); if(t==='dark') document.documentElement.setAttribute('data-theme','dark');
+  document.getElementById('themeBtn').addEventListener('click',function(){ var c=document.documentElement.getAttribute('data-theme'); if(c==='dark'){document.documentElement.removeAttribute('data-theme');localStorage.setItem('tema','light');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('tema','dark');} });
+</script>
+</body>
+</html>
