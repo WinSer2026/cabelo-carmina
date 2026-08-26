@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cabelo Carmina — Traços & Próteses Capilares | Matola - Maputo</title>
+<meta name="description" content="Serviços profissionais de traçar cabelo, tranças, extensões e simulação de próteses capilares em Matola - Maputo. Carmina Langa." />
+<style>
+  :root{
+    --gold:#c9a24b;
+    --gold-soft:#e3c87f;
+    --dark:#1c1410;
+    --dark2:#2a201a;
+    --cream:#f7f1e8;
+    --ink:#3a2f26;
+    --muted:#7a6a5b;
+    --radius:18px;
+    --shadow:0 18px 40px rgba(28,20,16,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+  h1,h2,h3{line-height:1.2;color:var(--dark)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(28,20,16,.92);backdrop-filter:blur(8px);color:#fff}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 22px;max-width:1140px;margin:0 auto;gap:14px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.5px;font-size:1.15rem;color:#fff}
+  .brand .logo{width:38px;height:38px;flex:0 0 auto}
+  .brand span{color:var(--gold-soft)}
+  .nav nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.92rem}
+  .nav nav a{color:#e9dccb}
+  .nav nav a:hover{color:var(--gold-soft)}
+  .nav a.cta{background:var(--gold);color:#1c1410;font-weight:700;padding:10px 16px;border-radius:999px;font-size:.9rem;white-space:nowrap}
+  .nav a.cta:hover{background:var(--gold-soft)}
+
+  .hero{position:relative;color:#fff;text-align:center;padding:96px 22px 112px;background:linear-gradient(180deg,rgba(28,20,16,.6),rgba(28,20,16,.85)),url("assets/imagens/15f6aeca9793449702054abd78677a57.jpg") center/cover no-repeat}
+  .hero .badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;background:rgba(201,162,75,.18);border:1px solid var(--gold);color:var(--gold-soft);padding:7px 16px;border-radius:999px;font-size:.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .hero h1{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:14px}
+  .hero h1 span{color:var(--gold-soft)}
+  .hero p{max-width:640px;margin:0 auto 26px;font-size:1.1rem;color:#f0e6d8}
+  .hero .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:700;font-size:.95rem}
+  .btn-gold{background:var(--gold);color:#1c1410}
+  .btn-gold:hover{background:var(--gold-soft)}
+  .btn-ghost{border:1.5px solid rgba(255,255,255,.6);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+  section{padding:72px 0}
+  .sec-head{text-align:center;margin-bottom:42px}
+  .sec-head .kicker{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem}
+  .sec-head h2{font-size:clamp(1.6rem,3.5vw,2.4rem);margin:8px 0}
+  .sec-head p{color:var(--muted);max-width:620px;margin:8px auto 0}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+  .card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);box-shadow:0 26px 50px rgba(28,20,16,.24)}
+  .card .img{aspect-ratio:3/4;background:#ddd center/cover no-repeat}
+  .card .body{padding:22px}
+  .card .body h3{font-size:1.2rem;color:var(--dark);margin-bottom:8px}
+  .card .body p{color:var(--muted);font-size:.95rem}
+  .card .tag{display:inline-block;margin-top:14px;font-size:.78rem;font-weight:700;color:var(--gold);background:rgba(201,162,75,.12);padding:5px 12px;border-radius:999px;letter-spacing:.5px}
+
+  .why{background:var(--dark);color:#f0e6d8}
+  .why h2{color:#fff}
+  .why .kicker{color:var(--gold-soft)}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:20px}
+  .feature{background:var(--dark2);border-radius:14px;padding:24px;border:1px solid rgba(201,162,75,.18)}
+  .feature h3{color:var(--gold-soft);font-size:1.05rem;margin-bottom:6px}
+  .feature p{color:#cbbfae;font-size:.92rem}
+
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .gallery-grid a{display:block;aspect-ratio:3/4;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#ddd center/cover no-repeat;transition:transform .25s ease}
+  .gallery-grid a:hover{transform:scale(1.03)}
+
+  .testi{background:var(--dark)}
+  .testi h2{color:#fff}
+  .testi .kicker{color:var(--gold-soft)}
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:20px}
+  .quote{background:var(--dark2);border-radius:14px;padding:24px;border:1px solid rgba(201,162,75,.18)}
+  .quote p{color:#e9dccb;font-size:.96rem;font-style:italic}
+  .quote .who{margin-top:14px;font-weight:700;color:var(--gold-soft);font-style:normal;font-size:.9rem}
+  .stars{color:var(--gold-soft);letter-spacing:2px;margin-bottom:8px}
+
+  .booking{background:var(--cream)}
+  .form-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:38px;max-width:760px;margin:0 auto}
+  .form-box h2{font-size:1.8rem;margin-bottom:6px;text-align:center}
+  .form-box .sub{text-align:center;color:var(--muted);margin-bottom:26px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{margin-bottom:16px;display:flex;flex-direction:column}
+  .field label{font-weight:700;font-size:.88rem;margin-bottom:6px;color:var(--ink)}
+  .field input,.field select,.field textarea{font:inherit;padding:12px 14px;border:1.5px solid #e3d8c8;border-radius:12px;background:#fdfbf7;color:var(--ink)}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+  .field textarea{resize:vertical;min-height:90px}
+  .form-box .btn-gold{width:100%;justify-content:center;border:none;cursor:pointer;margin-top:6px}
+  .form-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:14px}
+
+  .contact-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:38px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+  .contact-box h2{font-size:1.8rem;margin-bottom:10px}
+  .contact-box .info p{margin:8px 0;color:var(--ink);font-size:1rem}
+  .contact-box .info strong{color:var(--dark)}
+  .wa{display:inline-flex;align-items:center;gap:10px;margin-top:14px;background:#25D366;color:#fff;font-weight:700;padding:13px 22px;border-radius:999px}
+  .wa:hover{opacity:.92}
+  .wa.alt{background:#128C7E;margin-left:0}
+  .hours{margin-top:18px;border-top:1px solid #ece3d4;padding-top:16px}
+  .hours li{list-style:none;display:flex;justify-content:space-between;padding:5px 0;font-size:.92rem;border-bottom:1px dashed #efe7da}
+  .hours li span:last-child{color:var(--gold);font-weight:700}
+  .portrait{height:300px;border-radius:14px;background:url("assets/imagens/3a85e2c7aff9430f6a7af488f10452bd.jpg") center/cover no-repeat;box-shadow:var(--shadow)}
+
+  footer{background:var(--dark);color:#cbbfae;text-align:center;padding:26px 22px;font-size:.88rem}
+
+  @media(max-width:720px){
+    .contact-box{grid-template-columns:1fr}
+    .portrait{order:-1;height:240px}
+    .form-row{grid-template-columns:1fr}
+    .nav nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="none" stroke="#c9a24b" stroke-width="4"/>
+        <text x="50" y="62" text-anchor="middle" font-family="Segoe UI, Arial" font-size="38" font-weight="700" fill="#e3c87f">CL</text>
+      </svg>
+      Cabelo <span>Carmina</span>
+    </div>
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="pedido.html">Encomendar</a>
+      <a href="#porque">Porquê</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#agendar">Agendar</a>
+    </nav>
+    <a class="cta" href="#agendar">Agendar agora</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="badge">★ Salão de Beleza · Matola - Maputo</div>
+  <h1>Beleza que <span>transforma</span>, cabelo que inspira</h1>
+  <p>Especialista em traçar cabelo, tranças, extensões e simulação de próteses capilares. Realce natural e confiança para o seu dia a dia.</p>
+  <div class="actions">
+    <a class="btn btn-gold" href="#catalogo">Ver Catálogo</a>
+    <a class="btn btn-ghost" href="galeria.html">Ver Inspirações</a>
+  </div>
+</section>
+
+<section id="catalogo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Catálogo de Serviços</div>
+      <h2>Serviços pensados para si</h2>
+      <p>Cada serviço é executado com técnica, higiene e materiais de qualidade para um resultado duradouro e natural.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/0026cfc5c7cf5a156cc307e97156dec2.jpg')"></div>
+        <div class="body">
+          <h3>Traçar Cabelo (Crochet / Tricot)</h3>
+          <p>Instalação de tranças ou fios sintéticos e naturais sobre a base do seu cabelo com a técnica de crochet. Visual volumoso, protegido e sem tensão excessiva no couro cabeludo.</p>
+          <span class="tag">A partir de consulta</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/01e08757dc973bbed43af0862d8c7d00.jpg')"></div>
+        <div class="body">
+          <h3>Simulação de Próteses Capilares</h3>
+          <p>Solução estética para queda de cabelo ou áreas com falhas. Criamos a prótese sob medida que imita o seu tom e textura, devolvendo volume e autoestima com discrição total.</p>
+          <span class="tag">Personalizado</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/03f135712a6a2e2bc8f879690180e1c2.jpg')"></div>
+        <div class="body">
+          <h3>Tranças Tradicionais & Box Braids</h3>
+          <p>Tranças nagô, box braids, twist e estilos modernos feitos com precisão. Protegem o cabelo e duram semanas com manutenção simples.</p>
+          <span class="tag">Longa duração</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/03f46e397d53077a8f29f586532d8282.jpg')"></div>
+        <div class="body">
+          <h3>Extensões & Alongamento</h3>
+          <p>Aplicação de extensões para dar comprimento e densidade imediatas. Técnicas invisíveis que se fundem ao seu cabelo natural.</p>
+          <span class="tag">Efeito natural</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/04679ec09ea4aacabbf5d6915aa35b7a.jpg')"></div>
+        <div class="body">
+          <h3>Tratamentos & Hidratação</h3>
+          <p>Recuperação capilar com hidratação profunda, reconstrução e nutrição do couro cabeludo. Cabelo saudável como base de qualquer penteado.</p>
+          <span class="tag">Saúde capilar</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/06dac3e899e578c18e467fa2cff62f72.jpg')"></div>
+        <div class="body">
+          <h3>Penteados para Eventos</h3>
+          <p>Visuais para casamentos, formaturas e ocasiões especiais. Do clássico ao ousado, desenhado para brilhar na sua data importante.</p>
+          <span class="tag">Eventos</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/08b6ac6ea23695bc6f5586986917f11d.jpg')"></div>
+        <div class="body">
+          <h3>Coloração & Mechas</h3>
+          <p>Aplicação de cor, mechas, ombré e raiz esbatida com produtos de baixa agressividade. Tom uniforme e luminoso que realça o seu rosto.</p>
+          <span class="tag">Cor & estilo</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/093739ff91c25d8ace76bab35050adaf.jpg')"></div>
+        <div class="body">
+          <h3>Selagem Térmica & Alisamento</h3>
+          <p>Tratamento que reduz o volume e disciplina os fios, deixando o cabelo liso, brilhante e fácil de pentear por semanas.</p>
+          <span class="tag">Liso duradouro</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/0a47e29134426c4513fa7642befd2773.jpg')"></div>
+        <div class="body">
+          <h3>Corte & Design</h3>
+          <p>Corte personalizado ao formato do seu rosto e estilo de vida. Da manutenção ao visual renovado, com acabamento profissional.</p>
+          <span class="tag">Renovação</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('assets/imagens/0b440460fbbcc0842d40904b97cc9ca5.jpg')"></div>
+        <div class="body">
+          <h3>Manutenção & Retoque</h3>
+          <p>Retoque de raiz, lavagem e cuidado das suas tranças ou próteses para prolongar o visual e manter a higiene.</p>
+          <span class="tag">Acompanhamento</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Galeria</div>
+      <h2>Inspiração & Trabalhos</h2>
+      <p>Alguns dos visuais que criamos e referências de estilo. Veja a galeria completa com vídeos.</p>
+    </div>
+    <div class="gallery-grid">
+      <a href="galeria.html" style="background-image:url('assets/imagens/0b4d5327d2ce7e52298f0efa924f9893.jpg')"></a>
+      <a href="galeria.html" style="background-image:url('assets/imagens/0c9b5bb2f9fc3989eb2c1b1c847cc650.jpg')"></a>
+      <a href="galeria.html" style="background-image:url('assets/imagens/12c5b5bcc2676963cd1b6ba6b14d868e.jpg')"></a>
+      <a href="galeria.html" style="background-image:url('assets/imagens/132b0667ae29cd703960db3ee1979bb5.jpg')"></a>
+      <a href="galeria.html" style="background-image:url('assets/imagens/161dcf51394a3ee1f617fb9989bfbf7a.jpg')"></a>
+      <a href="galeria.html" style="background-image:url('assets/imagens/18d984fd57ee53a58f8e0739700f9366.jpg')"></a>
+      <a href="galeria.html" style="background-image:url('assets/imagens/1abf3b3e2f336c6a66d7727b56625449.jpg')"></a>
+      <a href="galeria.html" style="background-image:url('assets/imagens/21777facedbab7ad92beb284ebc9bb15.jpg')"></a>
+    </div>
+    <div style="text-align:center;margin-top:26px">
+      <a class="btn btn-gold" href="galeria.html">Ver galeria completa →</a>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="porque">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Porquê escolher</div>
+      <h2>Cabelo Carmina</h2>
+    </div>
+    <div class="why-grid">
+      <div class="feature">
+        <h3>Atendimento personalizado</h3>
+        <p>Cada cabeça é única. Avaliamos o seu cabelo e objetivo antes de começar.</p>
+      </div>
+      <div class="feature">
+        <h3>Materiais de qualidade</h3>
+        <p>Trabalhamos com fios e próteses selecionados para conforto e durabilidade.</p>
+      </div>
+      <div class="feature">
+        <h3>Higiene e cuidado</h3>
+        <p>Ferramentas esterilizadas e técnicas seguras para proteger o seu couro cabeludo.</p>
+      </div>
+      <div class="feature">
+        <h3>Resultado natural</h3>
+        <p>Acabamento discreto que valoriza a sua beleza sem parecer artificial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi" id="depoimentos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Depoimentos</div>
+      <h2>Quem provou, recomenda</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"Fiz as minhas box braids e adorei o acabamento. Durou semanas e o atendimento foi impecável."</p>
+        <div class="who">— Ana M., Matola</div>
+      </div>
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"A simulação da prótese devolveu-me a confiança. Ninguém nota e sinto-me linda outra vez."</p>
+        <div class="who">— Esperança C.</div>
+      </div>
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <p>"Profissional, pontual e muito cuidadosa. Recomendo a todas as minhas amigas."</p>
+        <div class="who">— Teresa N., Maputo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="agendar">
+  <div class="wrap">
+    <div class="form-box">
+      <h2>Agende a sua visita</h2>
+      <p class="sub">Preencha e envie a sua marcação diretamente pelo WhatsApp.</p>
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="nome">Nome completo</label>
+            <input id="nome" name="nome" type="text" required placeholder="Seu nome" />
+          </div>
+          <div class="field">
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input id="telefone" name="telefone" type="tel" required placeholder="84 000 0000" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="servico">Serviço desejado</label>
+            <select id="servico" name="servico" required>
+              <option value="">Selecione…</option>
+              <option>Traçar Cabelo (Crochet)</option>
+              <option>Simulação de Próteses Capilares</option>
+              <option>Tranças & Box Braids</option>
+              <option>Extensões & Alongamento</option>
+              <option>Tratamentos & Hidratação</option>
+              <option>Penteados para Eventos</option>
+              <option>Coloração & Mechas</option>
+              <option>Selagem & Alisamento</option>
+              <option>Corte & Design</option>
+              <option>Manutenção & Retoque</option>
+              <option>Outro / Consulta</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="data">Data pretendida</label>
+            <input id="data" name="data" type="date" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="obs">Observações</label>
+          <textarea id="obs" name="obs" placeholder="Comprimento, cor, horário preferido, etc."></textarea>
+        </div>
+        <button class="btn btn-gold" type="submit">Enviar pedido de agendamento</button>
+        <p class="form-note">Ao enviar, abre o WhatsApp com a sua mensagem pronta. Sem custo de app.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contato">
+  <div class="wrap">
+    <div class="contact-box">
+      <div class="info">
+        <div class="kicker" style="color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem">Contacto & Horário</div>
+        <h2>Fale com a Carmina</h2>
+        <p><strong>Nome:</strong> Carmina Langa</p>
+        <p><strong>Local:</strong> Matola - Maputo, Moçambique</p>
+        <p><strong>Cel:</strong> 842 785 461 &nbsp;|&nbsp; 870 508 213</p>
+        <a class="wa" href="https://wa.me/258842785461" target="_blank" rel="noopener">💬 WhatsApp: 842 785 461</a>
+        <a class="wa alt" href="https://wa.me/258870508213" target="_blank" rel="noopener">💬 WhatsApp: 870 508 213</a>
+        <ul class="hours">
+          <li><span>Segunda - Sexta</span><span>08:00 – 18:00</span></li>
+          <li><span>Sábado</span><span>08:00 – 16:00</span></li>
+          <li><span>Domingo</span><span>Mediante marcação</span></li>
+        </ul>
+      </div>
+      <div class="portrait"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Cabelo Carmina — Traços & Próteses Capilares · Matola - Maputo, Moçambique
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var nome = document.getElementById('nome').value.trim();
+    var tel = document.getElementById('telefone').value.trim();
+    var serv = document.getElementById('servico').value;
+    var data = document.getElementById('data').value;
+    var obs = document.getElementById('obs').value.trim();
+    var msg = "Olá Carmina! Quero agendar um serviço.%0A%0A"
+      + "*Nome:* " + encodeURIComponent(nome) + "%0A"
+      + "*Serviço:* " + encodeURIComponent(serv) + "%0A"
+      + "*Data:* " + encodeURIComponent(data) + "%0A"
+      + "*Telefone:* " + encodeURIComponent(tel) + "%0A"
+      + (obs ? "*Obs:* " + encodeURIComponent(obs) + "%0A" : "");
+    window.open("https://wa.me/258842785461?text=" + msg, "_blank");
+  });
+</script>
+</body>
+</html>
