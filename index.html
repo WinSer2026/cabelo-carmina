@@ -157,8 +157,21 @@
           <label for="obs">Observações</label>
           <textarea id="obs" placeholder="Comprimento, cor, horário preferido, etc."></textarea>
         </div>
-        <button class="btn btn-gold wide" type="submit">Enviar pedido de agendamento</button>
-        <p class="form-note">Ao enviar, abre o WhatsApp com a sua mensagem pronta. Sem custo de app.</p>
+        <div class="form-row">
+          <div class="field">
+            <label for="numeroDest">Enviar pedido para</label>
+            <select id="numeroDest">
+              <option value="258842785461">WhatsApp Vodacom (842 785 461)</option>
+              <option value="258870508213">WhatsApp Business (870 508 213)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="anexo">Anexar foto ou vídeo (opcional)</label>
+            <input id="anexo" type="file" accept="image/*,video/*" />
+          </div>
+        </div>
+        <button class="btn btn-gold wide" type="submit">Enviar pedido pelo WhatsApp</button>
+        <p class="form-note">Ao enviar, abre o WhatsApp da Carmina com a sua mensagem e a foto anexada (se selecionou uma). Sem custo de app.</p>
       </form>
     </div>
   </div>
@@ -318,18 +331,24 @@
     var serv=document.getElementById('servico').value;
     var data=document.getElementById('data').value;
     var obs=document.getElementById('obs').value.trim();
+    var destino=document.getElementById('numeroDest').value;
     var plain="Olá Carmina! Quero agendar um serviço.\n\n"
       + "Nome: "+nome+"\n"+"Serviço: "+serv+"\n"+"Data: "+data+"\n"+"Telefone: "+tel+"\n"
       + (refMedia ? "Estilo escolhido: "+refMedia.split('/').pop()+"\n" : "")
       + (obs ? "Obs: "+obs+"\n" : "");
-    if(refMedia && navigator.canShare){
+    var files=[];
+    var anexo=document.getElementById('anexo').files[0];
+    if(anexo) files.push(anexo);
+    if(refMedia){
       try{
         var blob=await fetch(refMedia).then(function(r){return r.blob();});
-        var file=new File([blob], fname, {type: isVid?'video/mp4':'image/jpeg'});
-        if(navigator.canShare({files:[file]})){ await navigator.share({files:[file], text:plain}); return; }
+        files.push(new File([blob], fname, {type: isVid?'video/mp4':'image/jpeg'}));
       }catch(err){}
     }
-    window.open("https://wa.me/"+S.whatsapp1+"?text="+encodeURIComponent(plain), "_blank");
+    if(files.length && navigator.canShare && navigator.canShare({files:files})){
+      try{ await navigator.share({files:files, text:plain}); return; }catch(err){}
+    }
+    window.location.href="https://wa.me/"+destino+"?text="+encodeURIComponent(plain);
   });
 
   /* PARTILHAR */
