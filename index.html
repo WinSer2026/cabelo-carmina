@@ -114,6 +114,9 @@
 
   footer{background:var(--dark);color:#cbbfae;text-align:center;padding:26px 22px;font-size:.88rem}
 
+  .fab{position:fixed;right:18px;bottom:18px;z-index:90;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:0 10px 26px rgba(37,211,102,.5);text-decoration:none}
+  .fab:hover{transform:scale(1.06)}
+
   @media(max-width:720px){
     .contact-box{grid-template-columns:1fr}
     .portrait{order:-1;height:240px}
@@ -378,7 +381,8 @@
           <textarea id="obs" name="obs" placeholder="Comprimento, cor, horário preferido, etc."></textarea>
         </div>
         <button class="btn btn-gold" type="submit">Enviar pedido de agendamento</button>
-        <p class="form-note">Ao enviar, abre o WhatsApp com a sua mensagem pronta. Sem custo de app.</p>
+        <p class="form-note">Ao enviar, abre o WhatsApp da Carmina com a sua mensagem completa pronta a enviar. Sem custo de app.</p>
+        <p class="form-note" style="margin-top:4px"><a href="https://wa.me/258842785461" target="_blank" rel="noopener" style="color:var(--gold);font-weight:700">💬 Ou conversar agora no WhatsApp</a></p>
       </form>
     </div>
   </div>
@@ -394,7 +398,7 @@
         <p><strong>Local:</strong> Malhampsene, Matola - Maputo, Moçambique</p>
         <p><strong>Cel:</strong> 842 785 461 &nbsp;|&nbsp; 870 508 213</p>
         <a class="wa" href="https://wa.me/258842785461" target="_blank" rel="noopener">💬 WhatsApp: 842 785 461</a>
-        <a class="wa alt" href="https://wa.me/258870508213" target="_blank" rel="noopener">💬 WhatsApp: 870 508 213</a>
+        <a class="wa alt" href="tel:870508213" target="_blank" rel="noopener">📞 Ligar: 870 508 213</a>
         <ul class="hours">
           <li><span>Segunda - Sexta</span><span>08:00 – 18:00</span></li>
           <li><span>Sábado</span><span>08:00 – 16:00</span></li>
@@ -409,6 +413,8 @@
 <footer>
   © <span id="year"></span> Cabelo Carmina — Traços & Próteses Capilares · Malhampsene, Matola - Maputo, Moçambique
 </footer>
+
+<a class="fab" href="https://wa.me/258842785461" target="_blank" rel="noopener" title="Conversar no WhatsApp" aria-label="Conversar no WhatsApp">💬</a>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -456,7 +462,7 @@
         }
       }catch(err){ /* fallback abaixo */ }
     }
-    window.open("https://wa.me/258842785461?text=" + enc, "_blank");
+    window.location.href = "https://wa.me/258842785461?text=" + enc;
   });
 </script>
 </body>
