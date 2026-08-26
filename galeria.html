@@ -46,7 +46,7 @@
 
   .video-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
   .video-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer}
-  .video-card video{width:100%;display:block;background:#000;aspect-ratio:9/16;object-fit:cover;pointer-events:none}
+  .video-card video{width:100%;display:block;background:#000;aspect-ratio:9/16;object-fit:cover}
   .video-card .cap{padding:12px 16px;font-size:.9rem;color:var(--muted);font-weight:600}
 
   .masonry{column-count:auto;column-width:230px;column-gap:14px}
@@ -140,7 +140,6 @@
   <img id="lbImg" src="" alt="Inspiração" />
   <video id="lbVid" src="" controls style="display:none"></video>
   <a id="lbOrder" class="lb-order" href="#">🛒 Encomendar este visual</a>
-  <a id="lbShare" class="lb-order" style="background:#25D366" href="#">🔗 Partilhar</a>
   <button class="nav-btn next" onclick="navLB(1)">›</button>
 </div>
 
@@ -149,7 +148,6 @@
 </footer>
 
 <script src="assets/galeria.js"></script>
-<script src="assets/conteudo.js"></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
   var lb = document.getElementById('lightbox');
@@ -159,12 +157,11 @@
   var currentList = [];
   var currentIndex = 0;
   var currentIsVid = false;
-  var currentSrc = '';
 
   function orderHref(src){ return 'index.html?ref=' + encodeURIComponent(src) + '#agendar'; }
 
   function openLB(src){
-    currentIsVid = false; currentSrc = src;
+    currentIsVid = false;
     currentList = GALERIA_IMAGENS.slice();
     currentIndex = currentList.indexOf(src); if(currentIndex < 0) currentIndex = 0;
     lbVid.style.display = 'none'; lbVid.pause();
@@ -173,11 +170,11 @@
     lb.classList.add('open');
   }
   function openVB(src){
-    currentIsVid = true; currentSrc = src;
+    currentIsVid = true;
     currentList = GALERIA_VIDEOS.slice();
     currentIndex = currentList.indexOf(src); if(currentIndex < 0) currentIndex = 0;
     lbImg.style.display = 'none';
-    lbVid.style.display = 'block'; lbVid.src = src; lbVid.load(); lbVid.play();
+    lbVid.style.display = 'block'; lbVid.src = src; lbVid.play();
     lbOrder.href = orderHref(src);
     lb.classList.add('open');
   }
@@ -189,12 +186,6 @@
     lbOrder.href = orderHref(src);
   }
   lb.addEventListener('click', function(e){ if(e.target === lb) closeLB(); });
-  document.getElementById('lbShare').addEventListener('click', function(e){
-    e.preventDefault();
-    var txt = (window.CONFIG ? CONFIG.shareText : 'Olhe este visual: ') + currentSrc.split('/').pop();
-    if(navigator.share){ navigator.share({text:txt}).catch(function(){}); return; }
-    window.open("https://wa.me/258842785461?text=" + encodeURIComponent(txt), "_blank");
-  });
   document.addEventListener('keydown', function(e){
     if(!lb.classList.contains('open')) return;
     if(e.key === 'Escape') closeLB();

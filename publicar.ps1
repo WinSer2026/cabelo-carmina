@@ -15,29 +15,6 @@ $arch   = Join-Path $base 'assets\publicado'
 $okImg  = @('.jpg','.jpeg','.png','.webp','.gif','.avif')
 $okVid  = @('.mp4','.webm','.ogg','.mov','.mkv')
 
-# Comprime uma imagem (JPEG, max 1200px, qualidade 82). Sem dependencias externas.
-function Optimize-Image($path){
-  try {
-    Add-Type -AssemblyName System.Drawing -ErrorAction SilentlyContinue
-    $img = [System.Drawing.Image]::FromFile($path)
-    $maxW = 1200
-    $ratio = [math]::Min(1, $maxW / $img.Width)
-    $w = $img.Width; $h = $img.Height
-    if ($ratio -lt 1) { $w = [int]($img.Width*$ratio); $h = [int]($img.Height*$ratio) }
-    $bmp = New-Object System.Drawing.Bitmap($w,$h)
-    $g = [System.Drawing.Graphics]::FromImage($bmp)
-    $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-    $g.DrawImage($img,0,0,$w,$h)
-    $enc = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
-    $par = New-Object System.Drawing.Imaging.EncoderParameters(1)
-    $par.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, 82)
-    $new = [System.IO.Path]::ChangeExtension($path,'jpg')
-    $bmp.Save($new,$enc,$par)
-    $g.Dispose(); $bmp.Dispose(); $img.Dispose()
-    if ($new -ne $path) { Remove-Item $path -Force }
-  } catch { Write-Output ("  (nao foi possivel comprimir: " + [System.IO.Path]::GetFileName($path) + ")") }
-}
-
 if (-not (Test-Path $inbox)) {
   New-Item -ItemType Directory -Force -Path $inbox | Out-Null
   Write-Output "Pasta 'assets\para-publicar' criada. Coloque ai as fotos/videos e volte a correr o script."
@@ -50,7 +27,7 @@ if ($files.Count -eq 0) { Write-Output "Nenhum ficheiro na pasta 'para-publicar'
 $moved = 0
 foreach ($f in $files) {
   $ext = $f.Extension.ToLower()
-  if ($okImg -contains $ext) { $dest = Join-Path $imgDir $f.Name; Copy-Item $f.FullName -Destination $dest -Force; Optimize-Image $dest; $moved++ }
+  if ($okImg -contains $ext) { Copy-Item $f.FullName -Destination (Join-Path $imgDir $f.Name) -Force; $moved++ }
   elseif ($okVid -contains $ext) { Copy-Item $f.FullName -Destination (Join-Path $vidDir $f.Name) -Force; $moved++ }
   else { Write-Output ("Ignorado (formato nao suportado): " + $f.Name); continue }
   if (-not (Test-Path $arch)) { New-Item -ItemType Directory -Force -Path $arch | Out-Null }
