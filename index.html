@@ -157,18 +157,9 @@
           <label for="obs">Observações</label>
           <textarea id="obs" placeholder="Comprimento, cor, horário preferido, etc."></textarea>
         </div>
-        <div class="form-row">
-          <div class="field">
-            <label for="numeroDest">Enviar pedido para</label>
-            <select id="numeroDest">
-              <option value="258842785461">WhatsApp Vodacom (842 785 461)</option>
-              <option value="258870508213">WhatsApp Business (870 508 213)</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="anexo">Anexar foto ou vídeo (opcional)</label>
-            <input id="anexo" type="file" accept="image/*,video/*" />
-          </div>
+        <div class="field">
+          <label for="anexo">Anexar foto ou vídeo (opcional)</label>
+          <input id="anexo" type="file" accept="image/*,video/*" />
         </div>
         <button class="btn btn-gold wide" type="submit">Enviar pedido pelo WhatsApp</button>
         <p class="form-note">Ao enviar, abre o WhatsApp da Carmina com a sua mensagem e a foto anexada (se selecionou uma). Sem custo de app.</p>
@@ -331,7 +322,6 @@
     var serv=document.getElementById('servico').value;
     var data=document.getElementById('data').value;
     var obs=document.getElementById('obs').value.trim();
-    var destino=document.getElementById('numeroDest').value;
     var plain="Olá Carmina! Quero agendar um serviço.\n\n"
       + "Nome: "+nome+"\n"+"Serviço: "+serv+"\n"+"Data: "+data+"\n"+"Telefone: "+tel+"\n"
       + (refMedia ? "Estilo escolhido: "+refMedia.split('/').pop()+"\n" : "")
@@ -348,7 +338,7 @@
     if(files.length && navigator.canShare && navigator.canShare({files:files})){
       try{ await navigator.share({files:files, text:plain}); return; }catch(err){}
     }
-    window.location.href="https://wa.me/"+destino+"?text="+encodeURIComponent(plain);
+    window.location.href="https://wa.me/"+S.whatsapp1+"?text="+encodeURIComponent(plain);
   });
 
   /* PARTILHAR */
